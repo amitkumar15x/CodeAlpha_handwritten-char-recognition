@@ -1,0 +1,9 @@
+tensorflow>=2.15
+numpy
+matplotlib
+Pillow
+emnist
+torch>=2.0
+torchvision
+opencv-python
+scikit-learn

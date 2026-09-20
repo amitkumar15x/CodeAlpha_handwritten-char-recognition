@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Handwritten Text Recognition</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                CRNN + CTC Recognition
+            </div>
+
+            <h1>Handwritten Text<br><span>Recognition</span></h1>
+
+            <p class="hero-description">
+                Upload a clear text-line image and let the trained CRNN model
+                extract lowercase English text automatically.
+            </p>
+        </section>
+
+        <section class="recognition-card">
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                id="upload-form"
+            >
+                <label
+                    for="image-input"
+                    class="upload-zone"
+                    id="upload-zone"
+                >
+                    <input
+                        id="image-input"
+                        name="image"
+                        type="file"
+                        accept=".png,.jpg,.jpeg,.bmp,.webp,image/*"
+                        hidden
+                    >
+
+                    <div class="upload-icon">↑</div>
+
+                    <p class="upload-title">
+                        Drop your image here
+                    </p>
+
+                    <p class="upload-subtitle">
+                        or click to browse · PNG, JPG, JPEG, BMP, WEBP
+                    </p>
+
+                    <p class="selected-file" id="selected-file">
+                        No file selected
+                    </p>
+                </label>
+
+                <button class="recognize-button" type="submit">
+                    Recognize text
+                    <span>→</span>
+                </button>
+            </form>
+
+            {% if error %}
+                <div class="message error-message">
+                    <span>!</span>
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+
+            {% if recognized_text is not none %}
+                <div class="result-section">
+                    <p class="result-label">Recognition result</p>
+
+                    <div class="result-box">
+                        <p>{{ recognized_text }}</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="copy-button"
+                        id="copy-button"
+                        data-text="{{ recognized_text }}"
+                    >
+                        Copy result
+                    </button>
+                </div>
+            {% endif %}
+
+            {% if image_name %}
+                <div class="preview-section">
+                    <p class="preview-label">Uploaded image</p>
+
+                    <img
+                        src="{{ url_for('uploaded_file', filename=image_name) }}"
+                        alt="Uploaded text"
+                        class="image-preview"
+                    >
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="features">
+            <article>
+                <span class="feature-number">01</span>
+                <h2>Upload</h2>
+                <p>Choose a clear image containing one line of text.</p>
+            </article>
+
+            <article>
+                <span class="feature-number">02</span>
+                <h2>Analyze</h2>
+                <p>The CRNN processes visual features as a text sequence.</p>
+            </article>
+
+            <article>
+                <span class="feature-number">03</span>
+                <h2>Extract</h2>
+                <p>CTC decoding converts predictions into readable text.</p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        const imageInput = document.getElementById("image-input");
+        const selectedFile = document.getElementById("selected-file");
+        const uploadZone = document.getElementById("upload-zone");
+
+        imageInput.addEventListener("change", function () {
+            if (imageInput.files.length > 0) {
+                selectedFile.textContent = imageInput.files[0].name;
+                uploadZone.classList.add("has-file");
+            } else {
+                selectedFile.textContent = "No file selected";
+                uploadZone.classList.remove("has-file");
+            }
+        });
+
+        const copyButton = document.getElementById("copy-button");
+
+        if (copyButton) {
+            copyButton.addEventListener("click", function () {
+                const text = copyButton.dataset.text;
+
+                navigator.clipboard.writeText(text).then(function () {
+                    copyButton.textContent = "Copied!";
+                    setTimeout(function () {
+                        copyButton.textContent = "Copy result";
+                    }, 1600);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
