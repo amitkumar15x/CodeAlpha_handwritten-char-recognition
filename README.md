@@ -2,15 +2,6 @@
 
 <div align="center">
 
-
-
-
-
-
-
-
-
-
 🧠 AI-powered text recognition from image input
 
 A Flask web application that recognizes lowercase English text from a single text-line image using a Convolutional Recurrent Neural Network (CRNN) trained with Connectionist Temporal Classification (CTC) loss.
@@ -452,7 +443,7 @@ For genuine handwritten-text recognition, the project documentation recommends t
 
 Amit Kumar
 
-💼 GitHub: @amitkumar15x
+💼 GitHub: https://github.com/amitkumar15x
 
 📄 License
 
