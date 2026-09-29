@@ -14,7 +14,6 @@ Input image:  hello world
 Output text: hello world
 ✨ Features
 🖼️ Upload a text image through a Flask web interface
-
 🔤 Recognize lowercase English characters and spaces
 
 📁 Supports PNG, JPG, JPEG, BMP, and WEBP
