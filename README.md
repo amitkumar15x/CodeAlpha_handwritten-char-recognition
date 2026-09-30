@@ -1,7 +1,6 @@
 ✍️ Handwritten Text Recognition using CRNN & CTC
 <div align="center">
 🧠 AI-powered text recognition from image input
-
 A Flask web application that recognizes lowercase English text from a single text-line image using a Convolutional Recurrent Neural Network (CRNN) trained with Connectionist Temporal Classification (CTC) loss.
 </div>
 🌟 Overview
