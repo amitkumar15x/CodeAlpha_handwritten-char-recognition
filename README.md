@@ -28,7 +28,6 @@ Output text: hello world
 🧪 Trains using synthetic multi-font text-line images
 
 🎛️ Uses light noise, blur, contrast, position, and font-size augmentation fileciteturn0file0L16-L26
-
 🏗️ Project Architecture
 
                     ┌──────────────────────────┐
